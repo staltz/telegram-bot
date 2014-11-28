@@ -71,6 +71,15 @@ function table.contains(table, element)
   return false
 end
 
+function trim1(s)
+  if(s == nil) 
+  then
+    return "";
+  else
+    return (s:gsub("^%s*(.-)%s*$", "%1"))
+  end
+end
+
 function run(msg, matches)
 
   --users available
@@ -85,11 +94,11 @@ function run(msg, matches)
   user = nil;
   
   --if nothing has been specified, default to samuel
-  if(string.len(matches[1]) == 0)
+  if(string.len(trim1(matches[1])) == 0)
   then
     user = "samuel";
   else
-    user = matches[1];
+    user = trim1(matches[1]);
   end
   
   --if chosen user doesnt exist
