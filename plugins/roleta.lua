@@ -85,11 +85,11 @@ function run(msg, matches)
   user = nil;
   
   --if nothing has been specified, default to samuel
-  if(string.len(msg.text) == 0)
+  if(string.len(matches[1]) == 0)
   then
     user = "samuel";
   else
-    user = msg.text;
+    user = matches[1];
   end
   
   --if chosen user doesnt exist
