@@ -3,9 +3,8 @@ function run(msg, matches)
 end
 
 return {
-    description = "reacts to politic chat",
-    usage = "Just talk about politics",
-    patterns = {"(dilma|aécio|PT|pt|psdb|prefeito|paes|cartacapital|veja|estadao|congresso|governo)"},
-    run = run
+    description = "reage a conversa sobre política", 
+    usage = "Falar sobre política ",
+    patterns = {"dilma"," pt","pt ","psdb","coxinha","prefeito","paes","cartacapital","veja","estadao","congresso","governo",".gov","politica","governador","voto","votar","votei","marina","lula"}, 
+    run = run 
 }
-
