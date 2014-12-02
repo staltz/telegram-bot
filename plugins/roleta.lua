@@ -1,13 +1,4 @@
 
-function trim1(s)
-  if(s == nil) 
-  then
-    return "";
-  else
-    return (s:gsub("^%s*(.-)%s*$", "%1"))
-  end
-end
-
 function run(msg, matches)
   sentences = {"Como odeio o Elop",
   "Nova nightly build do Cyanogen",
@@ -51,46 +42,9 @@ function run(msg, matches)
   "portaram o sailfish até pro galaxy tab 1G",
   "os graficos nao mentem, age atualmente eh melhor que StarCraft"}
 
-<<<<<<< HEAD
-  --users available
-  users = {"samuel", "keyo"};
-  
-  --start the main table
-  data = {};
-  data.samuel = getSamuel();
-  data.keyo = getKeyo();
-  
-  --user chosen
-  user = nil;
-  
-  --if nothing has been specified, default to samuel
-  if(string.len(trim1(matches[1])) == 0)
-  then
-    user = "samuel";
-  else
-    user = trim1(matches[1]);
-  end
-  
-  --if chosen user doesnt exist
-  if(table.contains(users, user))
-  then
-    
-    math.randomseed(os.time());
-    x = math.random(1,#data[user]);
-      
-    return data[user][x];    
-    
-  else
-    
-    return "aff sem roleta";
-    
-  end
-
-=======
   math.randomseed(os.time())
   x = math.random(1,#sentences)
   return sentences[x]
->>>>>>> parent of 552a716... adding extra choices for !roleta
 end
 
 return {
