@@ -7,10 +7,10 @@ end
 
 return {
     description = "Responde a uma pergunta", 
-    usage = "[alguma pergunta] ou [outra pergunta]?",
+    usage = "Pedro, [alguma pergunta] ou [outra pergunta]?",
     patterns = {
-    	"^(.*) OU (.*)%?$",
-    	"^(.*) ou (.*)%?$"
+    	"^Pedro, (.*) ou (.*)%?$",
+    	"^pedro, (.*) ou (.*)%?$"
     }, 
     run = run 
 }
