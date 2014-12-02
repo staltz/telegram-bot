@@ -1,8 +1,10 @@
 function run(msg, matches)
-  sentences = {"sim", "não"}
-  math.randomseed(os.time())
-  x = math.random(1,2)
-  return sentences[x]
+  if string.find(matches[1]," ou ") ~= 0 then
+    sentences = {"sim", "não"}
+    math.randomseed(os.time())
+    x = math.random(1,2)
+    return sentences[x]
+  end
 end
 
 return {
