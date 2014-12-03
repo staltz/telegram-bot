@@ -1,6 +1,6 @@
 function getKeyo()
 
-	b = http.request("https://api.myjson.com/bins/3yvs7");
+	b = http.request("https://rawgit.com/diedona/telegram-bot/pedro/userdata/keyo.json");
 	local keyo = json:decode(b);
 	return keyo;
 
@@ -8,7 +8,7 @@ end
 
 function getSamuel()
 
-	b = http.request("https://api.myjson.com/bins/410xz");
+	b = http.request("https://rawgit.com/diedona/telegram-bot/pedro/userdata/samuel.json");
 	local samuel = json:decode(b);
 	return samuel;
 
