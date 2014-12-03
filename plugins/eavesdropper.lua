@@ -13,10 +13,24 @@ ignored_words = {
     "favor", "mudar", "são", "né", "quer", "oo", "junto", "deixa", "além", "falar",
     "ser", "todos", "fazer", "muda", "fez", "deu", "deve", "ainda", "quantas",
     "quantos", "quanta", "quanto", "etc", "uso", "qual", "gente", "podia", "pode",
-    "daí", "vem", "oi"
+    "daí", "vem", "oi", "ah", "está", "estão", "num", "me"
 }
 
-chat_words = {}
+function get_chat_words()
+    local f = io.open('./res/chatwords.json', "r+")
+    if f == nil then
+        f = io.open('./res/chatwords.json', "w+")
+        f:write("{}") -- Write empty table
+        f:close()
+        return {}
+    else
+        local c = f:read "*a"
+        f:close()
+        return json:decode(c)
+    end
+end
+
+chat_words = get_chat_words()
 
 function inTable(tbl, item)
     for key, value in pairs(tbl) do

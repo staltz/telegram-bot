@@ -37,6 +37,10 @@ function make_frequency_table(chat_words)
     return freq
 end
 
+function compare_words(a,b)
+    return a.amount > b.amount
+end
+
 function freq_table_to_array(freq)
     arr = {}
     for word,amount in pairs(freq) do
@@ -45,11 +49,8 @@ function freq_table_to_array(freq)
             table.insert(arr, {word=word, amount=amount})
         end
     end
+    table.sort(arr, compare_words)
     return arr
-end
-
-function compare_words(a,b)
-    return a.amount > b.amount
 end
 
 function print_table(tbl)
