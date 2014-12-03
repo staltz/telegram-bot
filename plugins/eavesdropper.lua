@@ -64,6 +64,8 @@ function purge_old_chat_words(hours_ago)
 end
 
 function save_chat_words()
+    math.randomseed(os.time())
+    if math.random(1,5) == 1 then return nil end
     local json_text = json:encode_pretty(chat_words)
     file = io.open ("./res/chatwords.json", "w+")
     file:write(json_text)
