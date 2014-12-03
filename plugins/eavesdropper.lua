@@ -1,5 +1,5 @@
 ignored_words = {
-    "o","e","a","de","pra","do","da","para","que","q","eu","ele",
+    "", "o","e","a","de","pra","do","da","para","que","q","eu","ele",
     "vc","vo","sem","no","na","esse","essa","este","esta","aquele","aquela",
     "prefiro","aqueles","aquelas","por","ta","acha","acho","dele","dela",
     "como","muito","muita","mto","mta","tem","tinha","é","achei","achou",
@@ -9,7 +9,11 @@ ignored_words = {
     "desde","tmbm","mas","as","os","merda","isso","isto","mesmo","mesma",
     "bem","alguma","alguns","algum","sei","vai","dar","depois","antes","aqui",
     "to","só","so","estou","você","voce","ja","já","pro","mais","tudo","faz",
-    "porque","mim","nem","seu","seus","sua","suas","ou","vou","ter", "aí"
+    "porque","mim","nem","seu","seus","sua","suas","ou","vou","ter", "aí", "usar",
+    "favor", "mudar", "são", "né", "quer", "oo", "junto", "deixa", "além", "falar",
+    "ser", "todos", "fazer", "muda", "fez", "deu", "deve", "ainda", "quantas",
+    "quantos", "quanta", "quanto", "etc", "uso", "qual", "gente", "podia", "pode",
+    "daí", "vem", "oi"
 }
 
 chat_words = {}
@@ -22,6 +26,9 @@ function inTable(tbl, item)
 end
 
 function prepare_word(word)
+    if string.find(word, "^%!") then
+        return ""
+    end
     xword = string.gsub(word, "%?", "")
     xword = string.gsub(xword, "%.", "")
     xword = string.gsub(xword, "%,", "")

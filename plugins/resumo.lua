@@ -37,6 +37,21 @@ function make_frequency_table(chat_words)
     return freq
 end
 
+function freq_table_to_array(freq)
+    arr = {}
+    for word,amount in pairs(freq) do
+        print(word..'..'..amount)
+        if amount > 1 then
+            table.insert(arr, {word=word, amount=amount})
+        end
+    end
+    return arr
+end
+
+function compare_words(a,b)
+    return a.amount > b.amount
+end
+
 function print_table(tbl)
     for key,obj in pairs(tbl) do
         print(key..':'..obj)
@@ -45,8 +60,8 @@ end
 
 function make_summary(freq)
     summary = 'Falou-se de: '
-    for key,obj in pairs(freq) do
-        summary = summary .. key .. ' (' .. obj .. '), '
+    for i = 1,#freq do
+        summary = summary .. freq[i].word .. ' (' .. freq[i].amount .. '), '
     end
     return string.gsub(summary, ", $", "")
 end
@@ -55,8 +70,8 @@ function get_summary(hours_ago)
     local chat_words = get_chat_words()
     chat_words = filter_with_time(chat_words, hours_ago)
     frequent_words = make_frequency_table(chat_words)
-    print_table(frequent_words)
-    return make_summary(frequent_words)
+    frequent_arr = freq_table_to_array(frequent_words)
+    return make_summary(frequent_arr)
 end
 
 function get_hours(message)
