@@ -1,30 +1,30 @@
 ignored_words = {
-    "", "o","e","a","de","pra","do","da","para","que","q","eu","ele",
-    "vc","vo","sem","no","na","esse","essa","este","esta","aquele","aquela",
-    "prefiro","aqueles","aquelas","por","ta","acha","acho","dele","dela",
-    "como","muito","muita","mto","mta","tem","tinha","é","achei","achou",
-    "dos","das","tao","tão","com","sim","não","nao","n","s","sss","nnn",
-    "ss","nn","uma","um","dois","duas","tipo","tambem","tbm","também","te",
-    "até","nos","nas","tá","se","em","cada","minha","minhas","meu","meus",
-    "desde","tmbm","mas","as","os","merda","isso","isto","mesmo","mesma",
-    "bem","alguma","alguns","algum","sei","vai","dar","depois","antes","aqui",
-    "to","só","so","estou","você","voce","ja","já","pro","mais","tudo","faz",
-    "porque","mim","nem","seu","seus","sua","suas","ou","vou","ter", "aí", "usar",
-    "favor", "mudar", "são", "né", "quer", "oo", "junto", "deixa", "além", "falar",
-    "ser", "todos", "fazer", "muda", "fez", "deu", "deve", "ainda", "quantas",
-    "quantos", "quanta", "quanto", "etc", "uso", "qual", "gente", "podia", "pode",
-    "daí", "vem", "oi", "ah", "está", "estão", "num", "me"
+    '', 'o','e','a','de','pra','do','da','para','que','q','eu','ele',
+    'vc','vo','sem','no','na','esse','essa','este','esta','aquele','aquela',
+    'prefiro','aqueles','aquelas','por','ta','acha','acho','dele','dela',
+    'como','muito','muita','mto','mta','tem','tinha','é','achei','achou',
+    'dos','das','tao','tão','com','sim','não','nao','n','s','sss','nnn',
+    'ss','nn','uma','um','dois','duas','tipo','tambem','tbm','também','te',
+    'até','nos','nas','tá','se','em','cada','minha','minhas','meu','meus',
+    'desde','tmbm','mas','as','os','merda','isso','isto','mesmo','mesma',
+    'bem','alguma','alguns','algum','sei','vai','dar','depois','antes','aqui',
+    'to','só','so','estou','você','voce','ja','já','pro','mais','tudo','faz',
+    'porque','mim','nem','seu','seus','sua','suas','ou','vou','ter', 'aí', 'usar',
+    'favor', 'mudar', 'são', 'né', 'quer', 'oo', 'junto', 'deixa', 'além', 'falar',
+    'ser', 'todos', 'fazer', 'muda', 'fez', 'deu', 'deve', 'ainda', 'quantas',
+    'quantos', 'quanta', 'quanto', 'etc', 'uso', 'qual', 'gente', 'podia', 'pode',
+    'daí', 'vem', 'oi', 'ah', 'está', 'estão', 'num', 'me'
 }
 
 function get_chat_words()
-    local f = io.open('./res/chatwords.json', "r+")
+    local f = io.open('./res/chatwords.json', 'r+')
     if f == nil then
-        f = io.open('./res/chatwords.json', "w+")
-        f:write("{}") -- Write empty table
+        f = io.open('./res/chatwords.json', 'w+')
+        f:write('{}') -- Write empty table
         f:close()
         return {}
     else
-        local c = f:read "*a"
+        local c = f:read '*a'
         f:close()
         return json:decode(c)
     end
@@ -40,19 +40,20 @@ function inTable(tbl, item)
 end
 
 function prepare_word(word)
-    if string.find(word, "^%!") then
-        return ""
+    if string.find(word, '^%!') then
+        return ''
     end
-    xword = string.gsub(word, "%?", "")
-    xword = string.gsub(xword, "%.", "")
-    xword = string.gsub(xword, "%,", "")
-    xword = string.gsub(xword, "%!", "")
+    xword = string.gsub(word, '%?', '')
+    xword = string.gsub(xword, '%.', '')
+    xword = string.gsub(xword, '%,', '')
+    xword = string.gsub(xword, '%!', '')
+    xword = string.gsub(xword, '"', '')
     xword = string.lower(xword)
     return xword
 end
 
 function update_chat_words(message)
-    for word in string.gmatch(message, "%S+") do
+    for word in string.gmatch(message, '%S+') do
         word = prepare_word(word)
         if not inTable(ignored_words, word) then
             local word_and_time = {word=word, time=os.time()}
@@ -88,7 +89,7 @@ function save_chat_words()
     math.randomseed(os.time())
     if math.random(1,5) == 1 then return nil end
     local json_text = json:encode_pretty(chat_words)
-    file = io.open ("./res/chatwords.json", "w+")
+    file = io.open ('./res/chatwords.json', 'w+')
     file:write(json_text)
     file:close()
 end
@@ -100,7 +101,7 @@ function run(msg, matches)
 end
 
 return {
-    patterns = {"(.*)"},
+    patterns = {'(.*)'},
     run = run
 }
 
