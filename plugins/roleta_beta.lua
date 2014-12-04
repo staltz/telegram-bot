@@ -1,19 +1,21 @@
-function getKeyo()
+function getJsonData(name)
 
-	b = http.request("https://rawgit.com/diedona/telegram-bot/pedro/userdata/keyo.json");
-	local keyo = json:decode(b);
-	return keyo;
+	local information = {};
+
+	local messages = nil;
+
+	if unexpected_condition then error(); end
+	b = http.request("https://rawgit.com/diedona/telegram-bot/pedro/userdata/"..name..".json");
+
+	if unexpected_condition then error(); end
+	messages = json:decode(b);
+
+	information.messages = messages;
+
+	return information;
 
 end
 
-function getSamuel()
-
-	b = http.request("https://rawgit.com/diedona/telegram-bot/pedro/userdata/samuel.json");
-	local samuel = json:decode(b);
-	return samuel;
-
-
-end
 
 function table.contains(table, element)
 
@@ -38,16 +40,8 @@ end
 
 function run(msg, matches)
 
-  --users available
-  users = {"samuel", "keyo"};
-
-  --start the main table
-  data = {};
-  data.samuel = getSamuel();
-  data.keyo = getKeyo();
-
-  --user chosen
-  user = nil;
+  --chosen user
+  local user = nil;
 
   --if nothing has been specified, default to samuel
   if(string.len(trim1(matches[1])) == 0)
@@ -57,20 +51,24 @@ function run(msg, matches)
     user = trim1(matches[1]);
   end
 
-  --if chosen user doesnt exist
-  if(table.contains(users, user))
+  local success, information = pcall(getJsonData, user);
+
+  if(success)
   then
 
-    math.randomseed(os.time());
-    x = math.random(1,#data[user]);
+	math.randomseed(os.time());
+	math.random();math.random();math.random();
+	local x = math.random(1, #information.messages);
 
-    return data[user][x];
+	return information.messages[x];
 
   else
 
-    return "aff sem roleta";
+	print('FAIL:' .. information);
+	return "Não rolou a roleta, aff";
 
   end
+
 
 end
 
