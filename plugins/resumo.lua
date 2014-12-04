@@ -68,11 +68,15 @@ function make_summary(freq)
 end
 
 function get_summary(hours_ago)
-    local chat_words = get_chat_words()
-    chat_words = filter_with_time(chat_words, hours_ago)
-    frequent_words = make_frequency_table(chat_words)
-    frequent_arr = freq_table_to_array(frequent_words)
-    return make_summary(frequent_arr)
+    if hours_ago < 0 then
+        return "desculpa, esqueci minha bola de cristal em casa..."
+    else
+        local chat_words = get_chat_words()
+        chat_words = filter_with_time(chat_words, hours_ago)
+        frequent_words = make_frequency_table(chat_words)
+        frequent_arr = freq_table_to_array(frequent_words)
+        return make_summary(frequent_arr)
+    end
 end
 
 function get_hours(message)
