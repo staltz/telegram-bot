@@ -3,6 +3,9 @@ function getName(firstName, lastName)
   if((lastName == nil) or (string.len(lastName) == 0))
   then
     return firstName;
+  elseif((firstName == nil) or (string.len(firstName) == 0))
+  then
+    return lastName;
   else
     return (firstName .. " " .. lastName);
   end
@@ -12,9 +15,10 @@ end
 function run(msg, matches)
   
   kudosGiver = msg.from;
-  kudosGiverName = getName(kudosGiver.first_name, kudosGiver.last_name);
   
   print(kudosGiver.id);
+  
+  kudosGiverName = getName(kudosGiver.first_name, kudosGiver.last_name);
   
   for id, user in pairs(_users) do
     if id == kudosGiver.id then
