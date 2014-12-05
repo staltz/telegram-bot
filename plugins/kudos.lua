@@ -1,6 +1,6 @@
 function getName(firstName, lastName)
 {
-  if(lastName == nill || string.len(lastName) == 0)
+  if(lastName == nil || string.len(lastName) == 0)
   then
     return firstName;
   else
