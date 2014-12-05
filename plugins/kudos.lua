@@ -1,12 +1,13 @@
 function getName(firstName, lastName)
-{
-  if(lastName == nil || string.len(lastName) == 0)
+
+  if((lastName == nil) or (string.len(lastName) == 0))
   then
     return firstName;
   else
-    return firstName .. " " .. lastName;
+    return (firstName .. " " .. lastName);
   end
-}
+
+end
 
 function run(msg, matches)
   
