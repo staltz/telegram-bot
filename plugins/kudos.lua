@@ -16,6 +16,11 @@ function run(msg, matches)
   
   kudosGiver = msg.from;
   
+  -- se ficar mandando kudos escondido, toma na lata
+  if(msg.to.type ~= 'chat') then
+    return "Aff mandar kudos escondido é sacanagem.";
+  end
+  
   print(kudosGiver.id);
   
   kudosGiverName = getName(kudosGiver.first_name, kudosGiver.last_name);
