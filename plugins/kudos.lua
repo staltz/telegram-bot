@@ -16,11 +16,13 @@ function addToKudosJSON(currentKudos)
 
   local f = io.open('./res/kudos.json', "a");
   local c = f:read "*a";
-  local allKudos = json:decode(c);
+  local allKudos = nil;
   
-  if(allKudos == nil)
+  if(c == nil or string.len(c) == 0)
   then
     allKudos = {};
+  else
+    allKudos = json:decode(c);
   end
   
   table.insert(allKudos, currentKudos);
