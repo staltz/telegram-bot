@@ -124,7 +124,7 @@ function addToKudosJSON(currentKudos)
 
 end
 
-function getLastKudosFrom(id, allKudos)
+function getKudosFrom(id, allKudos)
   
   local kudosFrom = {};
   
