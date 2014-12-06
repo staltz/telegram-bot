@@ -152,13 +152,6 @@ end
 
 function isKudosSpammer(id, datetime, minimumTimeToWait)
   
-  local baseDateTime = (datetime + minimumTimeToWait);
-  
-  print('ID: ' .. id);
-  print('PASSED DATETIME: ' .. datetime);
-  print('TIME TO WAIT: ' .. minimumTimeToWait);
-  print('EXPECTED DATETIME: ' .. baseDateTime);
-  
   --get all the kudos from the file
   local allKudos = getAllKudos();
   vardump(allKudos);
@@ -170,7 +163,7 @@ function isKudosSpammer(id, datetime, minimumTimeToWait)
   vardump(latestKudos);
   
   --não mandou nenhum kudos OU se passou o tempo mínimo de espera
-  if( (latestKudos == nil) or (datetime > (latestKudos.Date + minimumTimeToWait)) )
+  if( (latestKudos == nil) or (datetime > (latestKudos.date + minimumTimeToWait)) )
   then
     return false;
   else
