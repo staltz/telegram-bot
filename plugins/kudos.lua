@@ -53,7 +53,7 @@ function getKudosSummary()
   	if(summary[kudo.to] == nil)
   	then
   		--summary[kudo.to] = 1;
-  		summary[kudo.to] = {Quantity = 1, From = kudo.id};
+  		summary[kudo.to] = {Quantity = 1, From = kudo.id, Date = kudos.date};
   	else
   		summary[kudo.to].Quantity = summary[kudo.to].Quantity + 1;
   	end;
@@ -133,7 +133,9 @@ end
 
 function getLatestKudos(kudos)
   
-  var_dump(kudos);
+  for id, sKudos in spairs(kudos, function(t,a,b) return t[b].Date < t[a].Date end) do
+  	return sKudos;
+  end
   
 end
 
@@ -142,6 +144,8 @@ function isKudosSpammer(id, datetime, minimumTimeToWait)
   local summary = getKudosSummary();
   local lastKudos = getLastKudosFrom(id, summary);
   local latestKudos = getLatestKudos(lastKudos);
+  
+  vardump(latestKudos);
   
   return false;
   
