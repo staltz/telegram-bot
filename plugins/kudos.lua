@@ -115,13 +115,33 @@ function addToKudosJSON(currentKudos)
 end
 
 function getLastKudosFrom(id, summary)
-  return nil;
+  
+  local kudosFrom = {};
+  
+  for idx, kudos in pairs(summary) do
+    
+    if(kudos.From == id)
+    then
+      table.insert(kudosFrom, kudos);
+    end
+    
+  end
+  
+  return kudosFrom;
+  
+end
+
+function getLatestKudos(kudos)
+  
+  var_dump(kudos);
+  
 end
 
 function isKudosSpammer(id, datetime, minimumTimeToWait)
   
   local summary = getKudosSummary();
   local lastKudos = getLastKudosFrom(id, summary);
+  local latestKudos = getLatestKudos(lastKudos);
   
   return false;
   
