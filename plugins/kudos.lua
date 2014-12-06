@@ -146,10 +146,20 @@ end
 
 function isKudosSpammer(id, datetime, minimumTimeToWait)
   
+  local baseDateTime = (datetime + minimumTimeToWait);
+  
+  print('ID: ' .. id);
+  print('PASSED DATETIME: ' .. datetime);
+  print('TIME TO WAIT: ' .. minimumTimeToWait);
+  print('EXPECTED DATETIME: ' .. baseDateTime);
+  
+  --get all the kudos from the file
   local summary = getKudosSummary();
-  --vardump(summary);
+  vardump(summary);
+  --get the last kudos from the id
   local lastKudos = getLastKudosFrom(id, summary);
-  --vardump(lastKudos);
+  vardump(lastKudos);
+  --get the very lastest kudos from the collection
   local latestKudos = getLatestKudos(lastKudos);
   vardump(latestKudos);
   
@@ -185,8 +195,7 @@ function run(msg, matches)
   then
     return "Aff para de spammar kudos " .. kudosGiverName;
   end
-  
-  
+
   --configurando o kudos atual
   local currentKudos = { id = kudosGiver.id, to = matches[1], date = msg.date};
   --salva no arquivo
