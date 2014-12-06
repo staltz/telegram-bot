@@ -36,20 +36,18 @@ function spairs(t, order)
     end
 end
 
-function getKudosStats()
-
+function getKudosSummary()
   local f = io.open('./res/kudos.json', "r+");
 
-  --se não achou o arquivo, reclama
+  --se não achou o arquivo, retorna nil
   if(f == nil)
   then
-  	return "Nada de Kudos ainda... Culpa do diogo. Ou do doná bugando bot.";
+  	return nil;
   end
 
   local c = f:read "*a";
   local kudos = json:decode(c);
   local summary = {};
-  local text = "";
 
   for id, kudo in pairs(kudos) do
   	if(summary[kudo.to] == nil)
@@ -58,6 +56,19 @@ function getKudosStats()
   	else
   		summary[kudo.to] = summary[kudo.to] + 1;
   	end;
+  end
+
+  return summary;
+  
+end
+
+function getKudosStats()
+
+  local summary = getKudosSummary();
+  
+  if(summary == nil)
+  then
+    return "Não se falou de kudos ainda";
   end
 
   for receiver, quantity in spairs(summary, function(t,a,b) return t[b] < t[a] end) do
@@ -101,6 +112,13 @@ function addToKudosJSON(currentKudos)
 
 end
 
+function isKudosSpammer(id, datetime)
+  
+  local summary = getKudosSummary();
+  return false;
+  
+end
+
 function run(msg, matches)
   
   local kudosGiver = msg.from;
@@ -117,6 +135,14 @@ function run(msg, matches)
   
   --pegando o nome de quem deu kudos
   local kudosGiverName = getName(kudosGiver.first_name, kudosGiver.last_name);
+  
+  --se já deu kudos a 1 minuto
+  if(isKudosSpammer(kudosGiver.id, os.time()))
+  then
+    return "Aff para de spammar kudos " .. kudosGiverName;
+  end
+  
+  
   --configurando o kudos atual
   local currentKudos = { id = kudosGiver.id, to = matches[1], date = msg.date};
   --salva no arquivo
