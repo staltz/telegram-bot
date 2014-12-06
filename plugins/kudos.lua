@@ -52,9 +52,10 @@ function getKudosSummary()
   for id, kudo in pairs(kudos) do
   	if(summary[kudo.to] == nil)
   	then
-  		summary[kudo.to] = 1;
+  		--summary[kudo.to] = 1;
+  		summary[kudo.to] = {Quantity = 1, From = kudo.id};
   	else
-  		summary[kudo.to] = summary[kudo.to] + 1;
+  		summary[kudo.to].Quantity = summary[kudo.to].Quantity + 1;
   	end;
   end
 
@@ -72,8 +73,8 @@ function getKudosStats()
     return "Não se falou de kudos ainda";
   end
 
-  for receiver, quantity in spairs(summary, function(t,a,b) return t[b] < t[a] end) do
-  	text = text .. receiver .. " (" .. quantity .. ")\n";
+  for receiver, quantity in spairs(summary, function(t,a,b) return t[b].Quantity < t[a].Quantity end) do
+  	text = text .. receiver .. " (" .. quantity.Quantity .. ")\n";
   end
 
   return text;
@@ -113,9 +114,15 @@ function addToKudosJSON(currentKudos)
 
 end
 
+function getLastKudosFrom(id, summary)
+  return nil;
+end
+
 function isKudosSpammer(id, datetime, minimumTimeToWait)
   
   local summary = getKudosSummary();
+  local lastKudos = getLastKudosFrom(id, summary);
+  
   return false;
   
 end
