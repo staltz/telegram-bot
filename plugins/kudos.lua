@@ -47,7 +47,7 @@ function getKudosStats()
   end
 
   local c = f:read "*a";
-  local kudos = json.decode(c);
+  local kudos = json:decode(c);
   local summary = {};
   local text = "";
 
