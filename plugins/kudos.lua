@@ -65,6 +65,7 @@ end
 function getKudosStats()
 
   local summary = getKudosSummary();
+  local text = "";
   
   if(summary == nil)
   then
@@ -112,7 +113,7 @@ function addToKudosJSON(currentKudos)
 
 end
 
-function isKudosSpammer(id, datetime)
+function isKudosSpammer(id, datetime, minimumTimeToWait)
   
   local summary = getKudosSummary();
   return false;
@@ -123,21 +124,21 @@ function run(msg, matches)
   
   local kudosGiver = msg.from;
   
+  --se está pedindo o comando de pegar o estado...
+  if(matches[1] == "get") then
+    return getKudosStats();
+  end  
+  
   -- se ficar mandando kudos escondido, toma na lata
   if(msg.to.type ~= 'chat') then
     return "Aff mandar kudos escondido é sacanagem.";
   end
   
-  --se está pedindo o comando de pegar o estado...
-  if(matches[1] == "get") then
-    return getKudosStats();
-  end
-  
   --pegando o nome de quem deu kudos
   local kudosGiverName = getName(kudosGiver.first_name, kudosGiver.last_name);
   
-  --se já deu kudos a 1 minuto
-  if(isKudosSpammer(kudosGiver.id, os.time()))
+  --se já deu kudos a um tempo (segundos plz)
+  if(isKudosSpammer(kudosGiver.id, os.time(), 60))
   then
     return "Aff para de spammar kudos " .. kudosGiverName;
   end
