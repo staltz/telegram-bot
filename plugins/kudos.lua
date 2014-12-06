@@ -14,19 +14,25 @@ end
 
 function addToKudosJSON(currentKudos)
 
-  local f = io.open('./res/kudos.json', "a");
+  local f = io.open('./res/kudos.json', "r+");
+  
+  --se não achou o arquivo, cria
+  if(f == nil)
+  then
+	  f = io.open('./res/kudos.json', "w+")
+  end  
+  
   local c = f:read "*a";
   local allKudos = nil;
   
-  if(c == nil or string.len(c) == 0)
-  then
-    allKudos = {};
-  else
-    allKudos = json:decode(c);
-  end
+  allKudos = json:decode(c);
   
   table.insert(allKudos, currentKudos);
   
+  --limpa a tabela
+  f = io.open('./res/kudos.json', "w+")
+  
+  --entra com os dados novos
   f:write(json:encode_pretty(allKudos))
   f:close();
   
@@ -47,9 +53,7 @@ function run(msg, matches)
   local kudosGiverName = getName(kudosGiver.first_name, kudosGiver.last_name);
   
   --configurando o kudos atual
-  local currentKudos = {};
-  currentKudos.id = kudosGiver.id;
-  currentKudos.to = matches[1];
+  local currentKudos = { id = kudosGiver.id, to = matches[1], date = msg.date};
   
   --salva no arquivo
   if(addToKudosJSON(currentKudos))
