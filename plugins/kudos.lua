@@ -136,10 +136,11 @@ function getLatestKudos(kudos)
   local kudosCollection = {};
   
   for id, sKudos in spairs(kudos, function(t,a,b) return t[b].Date < t[a].Date end) do
-  	table.insert(kudosCollection, sKudos);
+  	--table.insert(kudosCollection, sKudos);
+  	return sKudos;
   end
   
-  return kudosCollection[1];
+  --return kudosCollection[1];
   
 end
 
@@ -150,7 +151,7 @@ function isKudosSpammer(id, datetime, minimumTimeToWait)
   local lastKudos = getLastKudosFrom(id, summary);
   --vardump(lastKudos);
   local latestKudos = getLatestKudos(lastKudos);
-  vardump(lastKudos);
+  vardump(latestKudos);
   
   --não mandou nenhum kudos OU se passou o tempo mínimo de espera
   if( (latestKudos == nil) or (datetime > (latestKudos.Date + minimumTimeToWait)) )
