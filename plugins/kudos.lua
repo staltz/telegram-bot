@@ -53,7 +53,7 @@ function getKudosSummary()
   	if(summary[kudo.to] == nil)
   	then
   		--summary[kudo.to] = 1;
-  		summary[kudo.to] = {Quantity = 1, From = kudo.id, Date = kudos.date};
+  		summary[kudo.to] = {Quantity = 1, From = kudo.id, Date = kudo.date};
   	else
   		summary[kudo.to].Quantity = summary[kudo.to].Quantity + 1;
   	end;
