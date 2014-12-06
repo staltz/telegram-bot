@@ -142,12 +142,18 @@ end
 function isKudosSpammer(id, datetime, minimumTimeToWait)
   
   local summary = getKudosSummary();
-  vardump(summary);
+  --vardump(summary);
   local lastKudos = getLastKudosFrom(id, summary);
-  vardump(lastKudos);
+  --vardump(lastKudos);
   local latestKudos = getLatestKudos(lastKudos);
   
-  return false;
+  --não mandou nenhum kudos OU se passou o tempo mínimo de espera
+  if( (latestKudos == nil) or (datetime > (latestKudos.Date + minimumTimeToWait)) )
+  then
+    return false;
+  else
+    return true;
+  end
   
 end
 
