@@ -12,28 +12,50 @@ function getName(firstName, lastName)
 
 end
 
+function addToKudosJSON(currentKudos)
+
+  local f = io.open('./res/kudos.json', "a");
+  local c = f:read "*a";
+  local allKudos = json:decode(c);
+  
+  if(allKudos == nil)
+  then
+    allKudos = {};
+  end
+  
+  table.insert(allKudos, currentKudos);
+  
+  f:write(json:encode_pretty(allKudos))
+  f:close();
+  
+  return true;
+
+end
+
 function run(msg, matches)
   
-  kudosGiver = msg.from;
+  local kudosGiver = msg.from;
   
   -- se ficar mandando kudos escondido, toma na lata
   if(msg.to.type ~= 'chat') then
     return "Aff mandar kudos escondido é sacanagem.";
   end
   
-  print(kudosGiver.id);
+  --pegando o nome de quem deu kudos
+  local kudosGiverName = getName(kudosGiver.first_name, kudosGiver.last_name);
   
-  kudosGiverName = getName(kudosGiver.first_name, kudosGiver.last_name);
+  --configurando o kudos atual
+  local currentKudos = {};
+  currentKudos.id = kudosGiver.id;
+  currentKudos.to = matches[1];
   
-  for id, user in pairs(_users) do
-    if id == kudosGiver.id then
-      print('>> ACHAMOS! Foi o ' .. getName(user.first_name, user.last_name));
-    else
-      print('Não foi o ' .. getName(user.first_name, user.last_name));
-    end
+  --salva no arquivo
+  if(addToKudosJSON(currentKudos))
+  then
+    return kudosGiverName .. " deu kudos para " .. matches[1];
+  else
+    return "vish, deu zica, culpa do diogo";
   end
-  
-  return kudosGiverName .. " deu kudos para " .. matches[1];
   
 end
 
