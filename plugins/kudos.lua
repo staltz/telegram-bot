@@ -133,9 +133,13 @@ end
 
 function getLatestKudos(kudos)
   
+  local kudosCollection = {};
+  
   for id, sKudos in spairs(kudos, function(t,a,b) return t[b].Date < t[a].Date end) do
-  	return sKudos;
+  	table.insert(kudosCollection, sKudos);
   end
+  
+  return kudosCollection[1];
   
 end
 
