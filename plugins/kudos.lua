@@ -36,7 +36,7 @@ function spairs(t, order)
     end
 end
 
-function getKudosSummary()
+function getAllKudos()
   local f = io.open('./res/kudos.json', "r+");
 
   --se não achou o arquivo, retorna nil
@@ -46,14 +46,24 @@ function getKudosSummary()
   end
 
   local c = f:read "*a";
-  local kudos = json:decode(c);
+  return json:decode(c);
+
+end
+
+function getKudosSummary()
+  local kudos = getAllKudos();
   local summary = {};
+  
+  if(kudos == nil)
+  then
+    return nil;
+  end
 
   for id, kudo in pairs(kudos) do
   	if(summary[kudo.to] == nil)
   	then
   		--summary[kudo.to] = 1;
-  		summary[kudo.to] = {Quantity = 1, From = kudo.id, Date = kudo.date};
+  		summary[kudo.to] = {Quantity = 1, From = kudo.id};
   	else
   		summary[kudo.to].Quantity = summary[kudo.to].Quantity + 1;
   	end;
@@ -114,13 +124,13 @@ function addToKudosJSON(currentKudos)
 
 end
 
-function getLastKudosFrom(id, summary)
+function getLastKudosFrom(id, allKudos)
   
   local kudosFrom = {};
   
-  for idx, kudos in pairs(summary) do
+  for idx, kudos in pairs(allKudos) do
     
-    if(kudos.From == id)
+    if(kudos.id == id)
     then
       table.insert(kudosFrom, kudos);
     end
@@ -133,14 +143,10 @@ end
 
 function getLatestKudos(kudos)
   
-  local kudosCollection = {};
-  
-  for id, sKudos in spairs(kudos, function(t,a,b) return t[b].Date < t[a].Date end) do
+  for id, sKudos in spairs(kudos, function(t,a,b) return t[b].date < t[a].date end) do
   	--table.insert(kudosCollection, sKudos);
   	return sKudos;
   end
-  
-  --return kudosCollection[1];
   
 end
 
@@ -154,13 +160,13 @@ function isKudosSpammer(id, datetime, minimumTimeToWait)
   print('EXPECTED DATETIME: ' .. baseDateTime);
   
   --get all the kudos from the file
-  local summary = getKudosSummary();
-  vardump(summary);
-  --get the last kudos from the id
-  local lastKudos = getLastKudosFrom(id, summary);
-  vardump(lastKudos);
+  local allKudos = getAllKudos();
+  vardump(allKudos);
+  --get the kudos from the id
+  local kudos = getKudosFrom(id, allKudos);
+  vardump(kudos);
   --get the very lastest kudos from the collection
-  local latestKudos = getLatestKudos(lastKudos);
+  local latestKudos = getLatestKudos(kudos);
   vardump(latestKudos);
   
   --não mandou nenhum kudos OU se passou o tempo mínimo de espera
