@@ -142,10 +142,10 @@ end
 function isKudosSpammer(id, datetime, minimumTimeToWait)
   
   local summary = getKudosSummary();
+  vardump(summary);
   local lastKudos = getLastKudosFrom(id, summary);
+  vardump(lastKudos);
   local latestKudos = getLatestKudos(lastKudos);
-  
-  vardump(latestKudos);
   
   return false;
   
