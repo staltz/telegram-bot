@@ -94,14 +94,20 @@ end
 function addToKudosJSON(currentKudos)
 
   local f = io.open('./res/kudos.json', "r+");
+  local c = nil;
   
   --se não achou o arquivo, cria
   if(f == nil)
   then
-  	f = io.open('./res/kudos.json', "w+")
-  end  
+  	f = io.open('./res/kudos.json', "w+");
+  	f:write("{}"); -- Write empty table
+    f:close();
+    
+    c = "{}";
+  else
+    c = f:read "*a";
+  end 
   
-  local c = f:read "*a";
   local allKudos = nil;
   
   allKudos = json:decode(c);
