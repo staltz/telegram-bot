@@ -74,6 +74,6 @@ end
 return {
     description = "gira a roleta do bla. se não informar username, roda a do samuel.",
     usage = "!roleta [username]",
-    patterns = {"^!roleta$"},
+    patterns = {"^!roleta(.*)$"},
     run = run
 }
