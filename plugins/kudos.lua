@@ -134,6 +134,11 @@ function getKudosFrom(id, allKudos)
   
   local kudosFrom = {};
   
+  if(allKudos == nil)
+  then
+    return kudosFrom;
+  end
+  
   for idx, kudos in pairs(allKudos) do
     
     if(kudos.id == id)
@@ -149,6 +154,11 @@ end
 
 function getLatestKudos(kudos)
   
+  if(kudos == nil)
+  then
+    return nil;
+  end
+  
   for id, sKudos in spairs(kudos, function(t,a,b) return t[b].date < t[a].date end) do
   	--table.insert(kudosCollection, sKudos);
   	return sKudos;
@@ -160,13 +170,13 @@ function isKudosSpammer(id, datetime, minimumTimeToWait)
   
   --get all the kudos from the file
   local allKudos = getAllKudos();
-  vardump(allKudos);
+  --vardump(allKudos);
   --get the kudos from the id
   local kudos = getKudosFrom(id, allKudos);
-  vardump(kudos);
+  --vardump(kudos);
   --get the very lastest kudos from the collection
   local latestKudos = getLatestKudos(kudos);
-  vardump(latestKudos);
+  --(latestKudos);
   
   --não mandou nenhum kudos OU se passou o tempo mínimo de espera
   if( (latestKudos == nil) or (datetime > (latestKudos.date + minimumTimeToWait)) )
