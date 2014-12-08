@@ -37,7 +37,7 @@ function spairs(t, order)
 end
 
 function getAllKudos()
-  local f = io.open('../res/kudos.json', "r+");
+  local f = io.open('./res/kudos.json', "r+");
 
   --se não achou o arquivo, retorna nil
   if(f == nil)
@@ -93,13 +93,13 @@ end
 
 function addToKudosJSON(currentKudos)
 
-  local f = io.open('../res/kudos.json', "r+");
+  local f = io.open('./res/kudos.json', "r+");
   local c = nil;
   
   --se não achou o arquivo, cria
   if(f == nil)
   then
-  	f = io.open('../res/kudos.json', "w+");
+  	f = io.open('./res/kudos.json', "w+");
   	f:write("{}"); -- Write empty table
     f:close();
     
@@ -120,7 +120,7 @@ function addToKudosJSON(currentKudos)
   table.insert(allKudos, currentKudos);
   
   --limpa a tabela
-  f = io.open('../res/kudos.json', "w+")
+  f = io.open('./res/kudos.json', "w+")
   
   --entra com os dados novos
   f:write(json:encode_pretty(allKudos))
