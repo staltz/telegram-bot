@@ -53,7 +53,7 @@ function getRandomInsult(From)
     local insults = getInsults();
     x = math.random(1, #insults)
     local insult = insults[x];
-    local userName = getUserName(From.firs_name, From.last_name);
+    local userName = getUserName(From.first_name, From.last_name);
     
     if(string.match(insult, "{user}"))
     then
