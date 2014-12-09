@@ -76,7 +76,7 @@ function run(msg, matches)
         
         if(x == 2)
         then
-            return (getRandomInsult(msg.From));
+            return (getRandomInsult(msg.from));
         end
         
     end
