@@ -15,12 +15,43 @@ function getInsults()
     return {
         "aff política", "{user}, tem outras coisas fora política pra falar sabe?",
         "parece um papagaio falando de política {user}, aff",
-        "sabe metralhadora de merda? parece o {user} falando de política."
+        "sabe metralhadora de merda? parece o {user} falando de política.",
+        "putz, política não gente",
+        "agora fala-se de política",
+        "{user} c sabe que tá falando merda política né?",
+        "virou cientista político {user}?",
+        "Vai falar de política com suas nega"
     };
 end
 
+function table.contains(table, element)
+    for _, value in pairs(table) do
+        if value == element then
+            return true
+        end
+    end
+
+    return false
+end
+
 function isPolitics(text)
-    return true; --stub
+    
+    --pegando todos os padrões de política
+    politics = getPoliticsWords();
+    --verificação
+    local hasPolitics = false;
+    --coletando as palavras
+    for i in string.gmatch(text, "%S+") do
+      
+        if(table.contains(politics, i))
+        then
+            return true;
+        end
+      
+    end
+    
+    return false;
+    
 end
 
 function getUserName(firstName, lastName)
@@ -69,6 +100,8 @@ function run(msg, matches)
     if(isPolitics(matches[1]))
     then
         
+        print('tem política');
+        
         math.randomseed( os.time() )
         math.random(); math.random(); math.random()
         
@@ -80,6 +113,8 @@ function run(msg, matches)
         end
         
     end
+    
+    print('não tem política');
 
 end
 
