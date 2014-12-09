@@ -99,22 +99,21 @@ function run(msg, matches)
     --does it match any political context?
     if(isPolitics(matches[1]))
     then
-        
         print('tem política');
         
         math.randomseed( os.time() )
         math.random(); math.random(); math.random()
         
+        --50% de chance de reagir
         x = math.random(1,2);
-        
         if(x == 2)
         then
             return (getRandomInsult(msg.from));
         end
         
+    else
+        print('não tem política');
     end
-    
-    print('não tem política');
 
 end
 
