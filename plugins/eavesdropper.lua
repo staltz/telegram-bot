@@ -16,7 +16,13 @@ ignored_words = {
     'daí', 'vem', 'oi', 'ah', 'está', 'estão', 'num', 'me', 'lol', 'via', 'aff',
     'afe', 'afff', 'fica', 'ué', 'pq', 'hmm', 'aham', 'tive', 'xd', ':d', ':p',
     ':)', 'sair', 'posta', 'dá', 'foi', 'lá', 'tal', 'hm', 'sobre', 'deveria',
-    'ai', 'ow', 'quando', 'quem', 'xdd', 'xddd', 'vdd', 'nesse', 'ver'
+    'ai', 'ow', 'quando', 'quem', 'xdd', 'xddd', 'vdd', 'nesse', 'ver', 'sou',
+    'cara', 'rs', 'era', 'tenho', 'consegue', 'nada', 'mt', 'teve', 'po', 'quero',
+    'fui', 'posso', 'coisa', 'ela', 'vcs', 'entao', 'então', 'voces', 'vocês',
+    'falou', 'é', 'agora', 'tava', 'estava', 'era', 'olha', 'ih', 'fiz', 'outro',
+    'outra', 'preciso', 'precisa', 'ir', 'desse', 'daria', 'falei', 'ao',
+    'apenas', 'traz', 'tanta', 'tanto', 'beleza', 'nenhum', 'nenhuma', 'virou',
+    'pois',
 }
 
 function get_chat_words()
