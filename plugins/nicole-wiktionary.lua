@@ -1,4 +1,4 @@
-function get_nicole(msg, cmd)
+function get_nicole_wikcionario(msg, cmd)
   print("Executando Nicole-Wiktionary", cmd)
   b = http.request("http://keyo.me/nicole/wiktionary/?q=" .. url_encode(cmd))
   array = json:decode(b)
@@ -24,7 +24,7 @@ function url_encode(str)
 end
 
 function run(msg, matches)
-  return get_nicole(msg, matches[1])
+  return get_nicole_wikcionario(msg, matches[1])
 end
 
 return {
