@@ -1,11 +1,13 @@
 function get_nicole(msg, cmd)
-  print("Executando Nicole", cmd)
-  b = http.request("http://keyo.me/nicole/?q=" .. url_encode(cmd))
+  print("Executando Nicole-Meme", cmd)
+  b = http.request("http://keyo.me/nicole/meme/?q=" .. url_encode(cmd))
   array = json:decode(b)
-  -- print("Nicole retornou", array)
   if (array.img) then
     file = download_to_file(array.img)
     send_photo(get_receiver(msg), file, ok_cb, false)
+  elseif (array.media) then
+    file = download_to_file(array.media)
+    send_document(get_receiver(msg), file, ok_cb, false)
   elseif (array.msg) then
     return array.msg
   end
@@ -26,9 +28,9 @@ function run(msg, matches)
 end
 
 return {
-    description = "Nicole",
-    usage = "Nicole, [alguma coisa])",
-    patterns = {"^Nicole, (.*)$"},
+    description = "Nicole Meme",
+    usage = "!meme (fundo) (primeira frase) (,) (segunda frase)",
+    patterns = {"^!meme (.*)$"},
     run = run
 }
 
