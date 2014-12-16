@@ -1,6 +1,6 @@
-function get_nicole_wikcionario(msg, cmd)
-  print("Executando Nicole-Wiktionary", cmd)
-  b = http.request("http://keyo.me/nicole/wiktionary/?q=" .. url_encode(cmd))
+function get_nicole_wikipedia(msg, cmd)
+  print("Executando Nicole-Wikipedia", cmd)
+  b = http.request("http://keyo.me/nicole/wikipedia/?q=" .. url_encode(cmd))
   array = json:decode(b)
   if (array.img) then
     file = download_to_file(array.img)
@@ -24,12 +24,12 @@ function url_encode(str)
 end
 
 function run(msg, matches)
-  return get_nicole_wikcionario(msg, matches[1])
+  return get_nicole_wikipedia(msg, matches[1])
 end
 
 return {
-    description = "Nicole Wiktionary",
-    usage = "!defina (palavra)",
+    description = "Nicole Wikipedia",
+    usage = "!defina (palavra ou termo)",
     patterns = {"^!defina (.*)$"},
     run = run
 }
