@@ -1,6 +1,6 @@
-function get_nicole_teste(msg, matches, plugin)
+function get_nicole(msg, matches, plugin)
   print("Executando Nicole", matches)
-  b = http.request("http://keyo.me/nicole/" .. plugin .. "/?q=" .. url_encode(matches)) .. "&id=" .. msg.from.id .. "&fn=" .. msg.from.first_name .. "&ln=" .. msg.from.last_name
+  b = http.request("http://keyo.me/nicole/" .. plugin .. "/?q=" .. url_encode(matches)) .. "&id=" .. url_encode(msg.from.id) .. "&fn=" .. url_encode(msg.from.first_name) .. "&ln=" .. url_encode(msg.from.last_name)
   array = json:decode(b)
   if (array.img) then
     file = download_to_file(array.img)
@@ -15,7 +15,7 @@ function get_nicole_teste(msg, matches, plugin)
     send_document(get_receiver(msg), file, ok_cb, false)
   end
   if (array.lat and array.lng) then
-    send_location(get_receiver(msg), array.lat, array.lng)
+    send_location(get_receiver(msg), array.lat, array.lng, ok_cb, false)
   end
   if (array.msg) then
     return array.msg
@@ -33,7 +33,7 @@ function url_encode(str)
 end
 
 function run(msg, matches)
-  return get_nicole_teste(msg, matches[1], "core")
+  return get_nicole(msg, matches[1], "core")
 end
 
 return {
