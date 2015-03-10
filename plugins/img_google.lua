@@ -2,7 +2,7 @@
 function getGoogleImage(text)
   text = URL.escape(text)
   for i = 1, 5, 1 do -- Try 5 times
-    local api = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=8&q="
+    local api = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&safe=active&rsz=8&q="
     b = http.request(api..text)
     local google = json:decode(b)
 
@@ -25,8 +25,8 @@ function run(msg, matches)
 end
 
 return {
-    description = "search image with Google API and sends it", 
-    usage = "!img [topic]",
+    description = "Search image with Google API and sends it.", 
+    usage = "!img [term]: Random search an image with Google API.",
     patterns = {"^!img (.*)$"}, 
     run = run 
 }
