@@ -23,6 +23,7 @@ function get_nicole(msg, matches, plugin)
 end
 
 function url_encode(str)
+  str = str or ""
   if (str) then
     str = string.gsub (str, "\n", "\r\n")
     str = string.gsub (str, "([^%w %-%_%.%~])",
