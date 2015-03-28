@@ -1,6 +1,6 @@
 function get_nicole(msg, matches, plugin)
   print("Executando Nicole", matches)
-  b = http.request("http://keyo.me/nicole/" .. plugin .. "/?q=" .. url_encode(matches) .. "&id=" .. url_encode(msg.from.id) .. "&fn=" .. url_encode(msg.from.first_name) .. "&ln=" .. url_encode(msg.from.last_name))
+  b = http.request("http://keyo.me/nicole/" .. plugin .. "/?q=" .. url_encode(matches) .. "&id=" .. url_encode(msg.from.id) .. "&fn=" .. url_encode(msg.from.first_name) .. "&ln=" .. url_encode(msg.from.last_name) .. "&toType=" .. url_encode(msg.to.type) .. "&toId=" .. url_encode(msg.to.id))
   array = json:decode(b)
   if (array.img) then
     file = download_to_file(array.img)
